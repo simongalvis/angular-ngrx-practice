@@ -1,1 +1,17 @@
-<p>traffic-light works!</p>
+<div class="row">
+  <div class="col-2">
+    <ul class="nav nav-pills flex-column">
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          [routerLinkActive]="['active']"
+          [routerLink]="['light']"
+          >Light</a
+        >
+      </li>
+    </ul>
+  </div>
+  <div class="col">
+    <router-outlet></router-outlet>
+  </div>
+</div>
