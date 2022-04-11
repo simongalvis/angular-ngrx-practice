@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { StoreModule } from '@ngrx/store';
+import { CounterComponent } from './components/counter/counter.component';
 import { LightComponent } from './components/light/light.component';
 import { featureName, reducers } from './state';
 import { TrafficLightComponent } from './traffic-light.component';
@@ -16,6 +17,10 @@ const routes: Routes = [
         component: LightComponent,
       },
       {
+        path: 'counter',
+        component: CounterComponent,
+      },
+      {
         path: '**',
         redirectTo: 'light',
       },
@@ -24,7 +29,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [TrafficLightComponent, LightComponent],
+  declarations: [TrafficLightComponent, LightComponent, CounterComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
