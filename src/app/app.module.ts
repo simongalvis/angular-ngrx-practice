@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { HomeComponent } from './components/home/home.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
-import { TodoModule } from './features/todo/todo.module';
 
 @NgModule({
   declarations: [
@@ -15,7 +14,7 @@ import { TodoModule } from './features/todo/todo.module';
     HomeComponent,
     NavigationComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, TodoModule, AppReduxModule],
+  imports: [BrowserModule, AppRoutingModule, AppReduxModule],
   providers: [],
   bootstrap: [AppComponent],
 })

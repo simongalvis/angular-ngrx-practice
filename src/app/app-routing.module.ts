@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
-import { TodoComponent } from './features/todo/todo.component';
 
 const routes: Routes = [
   {
     path: 'todos',
-    component: TodoComponent,
+    loadChildren: () =>
+      import('./features/todo/todo.module').then((m) => m.TodoModule),
   },
   {
     path: 'home',
