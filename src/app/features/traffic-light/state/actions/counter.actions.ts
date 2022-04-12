@@ -7,3 +7,7 @@ export const countIncremented = createAction(
 export const countDecremented = createAction(
   '[traffic lights counter] count was decremented'
 );
+
+export const countReset = createAction(
+  '[traffic lights counter] count was reset'
+);

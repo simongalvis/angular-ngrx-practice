@@ -3,3 +3,20 @@
   <span>{{ count$ | async }}</span>
   <button (click)="increment()" class="btn btn-sm btn-success">+</button>
 </div>
+<div>
+  <button
+    [disabled]="resetDisabled$ | async"
+    (click)="reset()"
+    class="btn btn-sm btn-danger"
+  >
+    Reset
+  </button>
+</div>
+
+<div *ngIf="fizzBuzz$ | async as value">
+  <div *ngIf="value === 'fizz'" class="alert alert-info">Fizz!</div>
+  <div *ngIf="value === 'buzz'" class="alert alert-info">buzz!</div>
+  <div *ngIf="value === 'fizzbuzz'" class="alert alert-info">
+    FIZZBUZZ BABY!
+  </div>
+</div>
