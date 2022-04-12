@@ -1,10 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { CounterComponent } from './components/counter/counter.component';
 import { LightComponent } from './components/light/light.component';
 import { featureName, reducers } from './state';
+import { CounterEffects } from './state/effects/counter.effects';
 import { TrafficLightComponent } from './traffic-light.component';
 
 const routes: Routes = [
@@ -33,6 +35,7 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
+    EffectsModule.forFeature([CounterEffects]),
     StoreModule.forFeature(featureName, reducers),
   ],
   exports: [RouterModule],

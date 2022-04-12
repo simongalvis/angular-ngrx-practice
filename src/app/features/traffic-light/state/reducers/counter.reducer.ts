@@ -10,6 +10,7 @@ const initialState: CounterState = {
 
 export const reducer = createReducer(
   initialState,
+  on(actions.counterCount, (_, a) => ({ current: a.payload })),
   on(actions.countReset, () => initialState),
   on(actions.countDecremented, (s) => ({ current: s.current - 1 })),
   on(actions.countIncremented, (s) => ({ current: s.current + 1 }))

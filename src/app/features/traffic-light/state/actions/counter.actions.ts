@@ -1,4 +1,4 @@
-import { createAction } from '@ngrx/store';
+import { createAction, props } from '@ngrx/store';
 
 export const countIncremented = createAction(
   '[traffic lights counter] count was incremented'
@@ -10,4 +10,9 @@ export const countDecremented = createAction(
 
 export const countReset = createAction(
   '[traffic lights counter] count was reset'
+);
+
+export const counterCount = createAction(
+  '[traffic lights counter] count',
+  props<{ payload: number }>()
 );
