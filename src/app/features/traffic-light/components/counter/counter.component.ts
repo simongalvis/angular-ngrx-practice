@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import {
-  selectCounterCurrent,
-  selectCounterFizzBuzz,
-  selectCounterResetButtonDisabled,
-} from '../../state';
+import { CounterModel } from '../../models';
+import { selectCounterModel } from '../../state';
 import * as actions from '../../state/actions/counter.actions';
 @Component({
   selector: 'app-counter',
@@ -13,16 +10,12 @@ import * as actions from '../../state/actions/counter.actions';
   styleUrls: ['./counter.component.css'],
 })
 export class CounterComponent implements OnInit {
-  count$!: Observable<number>;
-  resetDisabled$!: Observable<boolean>;
-  fizzBuzz$!: Observable<'fizzbuzz' | 'fizz' | 'buzz' | null>;
+  model$!: Observable<CounterModel>;
 
   constructor(private store: Store) {}
 
   ngOnInit(): void {
-    this.fizzBuzz$ = this.store.select(selectCounterFizzBuzz);
-    this.count$ = this.store.select(selectCounterCurrent);
-    this.resetDisabled$ = this.store.select(selectCounterResetButtonDisabled);
+    this.model$ = this.store.select(selectCounterModel);
   }
 
   increment() {

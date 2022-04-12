@@ -5,6 +5,7 @@ import {
   createFeatureSelector,
   createSelector,
 } from '@ngrx/store';
+import { CounterModel } from '../models';
 import * as fromCounter from './reducers/counter.reducer';
 import * as fromLights from './reducers/light.reducer';
 
@@ -57,5 +58,18 @@ export const selectCounterFizzBuzz = createSelector(
       return 'buzz';
     }
     return null;
+  }
+);
+
+export const selectCounterModel = createSelector(
+  selectCounterCurrent,
+  selectCounterResetButtonDisabled,
+  selectCounterFizzBuzz,
+  (current, reset, fizzbuzz) => {
+    return {
+      count: current,
+      resetDisabled: reset,
+      fizzBuzz: fizzbuzz,
+    } as CounterModel;
   }
 );
