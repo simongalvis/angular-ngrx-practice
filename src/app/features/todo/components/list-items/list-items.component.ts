@@ -4,13 +4,11 @@ import { TodoListModel } from '../../models';
 @Component({
   selector: 'app-list-items',
   templateUrl: './list-items.component.html',
-  styleUrls: ['./list-items.component.css']
+  styleUrls: ['./list-items.component.css'],
 })
 export class ListItemsComponent implements OnInit {
   @Input() model: TodoListModel | null = null;
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

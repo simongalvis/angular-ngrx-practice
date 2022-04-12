@@ -1,15 +1,15 @@
-<ul class="list-unstyled">
+<ul class="list-unstyled" *ngIf="model">
   <li
-  class="alert"
-  [ngClass]="{
-  'alert-success': item.completed,
-  'alert-info': !item.completed
-  }"
-  *ngFor="let item of model?.items"
+    class="alert"
+    [ngClass]="{
+      'alert-success': item.completed,
+      'alert-info': !item.completed
+    }"
+    *ngFor="let item of model.items"
   >
-  <span [ngClass]="{ completed: item.completed }">{{
-  item.description
-  }}</span>
-  <button *ngIf="!item.completed" class="btn btn-sm btn-danger">X</button>
+    <span [ngClass]="{ completed: item.completed }">{{
+      item.description
+    }}</span>
+    <button *ngIf="!item.completed" class="btn btn-sm btn-danger">X</button>
   </li>
-  </ul>
+</ul>

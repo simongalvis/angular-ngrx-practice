@@ -1,14 +1,2 @@
-<ul class="list-unstyled">
-  <li class="alert alert-info">
-  <span>Clean Garage</span> <button class="btn btn-sm btn-danger">X</button>
-  </li>
-  <li class="alert alert-success">
-  <span class="purchased">Paint Deck</span>
-  </li>
-
-
-
-  <li class="alert alert-info">
-  <span>Buy Mower</span> <button class="btn btn-sm btn-danger">X</button>
-  </li>
-  </ul>
+<p>Your Shopping List</p>
+<app-list-items [model]="data$ | async"></app-list-items>

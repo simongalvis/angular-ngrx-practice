@@ -29,8 +29,17 @@ const routes: Routes = [
   },
 ];
 @NgModule({
-  declarations: [TodoComponent, ListComponent, EntryComponent, ListItemsComponent],
-  imports: [CommonModule, RouterModule.forChild(routes), StoreModule.forFeature(featureName, reducers)],
+  declarations: [
+    TodoComponent,
+    ListComponent,
+    EntryComponent,
+    ListItemsComponent,
+  ],
+  imports: [
+    CommonModule,
+    RouterModule.forChild(routes),
+    StoreModule.forFeature(featureName, reducers),
+  ],
   exports: [RouterModule],
 })
 export class TodoModule {}
