@@ -1,15 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { todoFeatureEntered } from './state/actions/feature.actions';
 
 @Component({
   selector: 'app-todo',
   templateUrl: './todo.component.html',
-  styleUrls: ['./todo.component.css']
+  styleUrls: ['./todo.component.css'],
 })
-export class TodoComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
+export class TodoComponent {
+  constructor(store: Store) {
+    store.dispatch(todoFeatureEntered());
   }
-
 }
