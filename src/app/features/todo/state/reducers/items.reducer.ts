@@ -16,5 +16,6 @@ const initialState = adapter.getInitialState();
 
 export const reducer = createReducer(
   initialState,
-  on(documents.todoList, (s, a) => adapter.setAll(a.payload, s))
+  on(documents.todoList, (s, a) => adapter.setAll(a.payload, s)),
+  on(documents.todo, (s, a) => adapter.addOne(a.payload, s))
 );

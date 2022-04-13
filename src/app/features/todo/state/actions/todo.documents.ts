@@ -5,3 +5,8 @@ export const todoList = createAction(
   '[todos] document todo list',
   props<{ payload: ItemEntity[] }>()
 );
+
+export const todo = createAction(
+  '[todos] document todo item',
+  props<{ payload: ItemEntity }>()
+);
