@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { TodoListModel } from '../../models';
+import { selectItemListModel } from '../../state';
 
 @Component({
   selector: 'app-list',
@@ -9,7 +11,9 @@ import { TodoListModel } from '../../models';
 })
 export class ListComponent implements OnInit {
   data$!: Observable<TodoListModel>;
-  constructor() {}
+  constructor(private store: Store) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.data$ = this.store.select(selectItemListModel)
+  }
 }
