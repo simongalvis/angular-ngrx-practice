@@ -7,9 +7,15 @@
     }"
     *ngFor="let item of model.items"
   >
-    <span [ngClass]="{ completed: item.completed }">{{
-      item.description
-    }}</span>
-    <button *ngIf="!item.completed" class="btn btn-sm btn-danger">X</button>
+    <span [ngClass]="{ completed: item.completed }"
+      >{{ item.description }}
+      <small *ngIf="item.isPending">Saving your Changes...</small></span
+    >
+    <button
+      *ngIf="!item.completed && !item.isPending"
+      class="btn btn-sm btn-danger"
+    >
+      X
+    </button>
   </li>
 </ul>
