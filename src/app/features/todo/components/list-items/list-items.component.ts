@@ -4,7 +4,9 @@ import {
   Input,
   OnInit,
 } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { TodoListModel } from '../../models';
+import { itemCompleted } from '../../state/actions/todos.events';
 
 @Component({
   selector: 'app-list-items',
@@ -17,7 +19,11 @@ export class ListItemsComponent implements OnInit {
   // data passed in as an Input()
   // OR any Observable or Promise.
   @Input() model: TodoListModel | null = null;
-  constructor() {}
+  constructor(private store: Store) {}
 
   ngOnInit(): void {}
+
+  markCompleted(id: string) {
+    this.store.dispatch(itemCompleted({ payload: id }));
+  }
 }
