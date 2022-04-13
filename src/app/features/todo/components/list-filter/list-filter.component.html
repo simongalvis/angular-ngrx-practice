@@ -1,0 +1,31 @@
+<div
+  *ngIf="filterKey$ | async as key"
+  class="btn-group"
+  role="group"
+  aria-label="List Filter"
+>
+  <button
+    [disabled]="key === 'all'"
+    (click)="showAll()"
+    type="button"
+    class="btn btn-primary"
+  >
+    Show All
+  </button>
+  <button
+    [disabled]="key === 'completed'"
+    (click)="showCompleted()"
+    type="button"
+    class="btn btn-primary"
+  >
+    Show Completed
+  </button>
+  <button
+    [disabled]="key === 'incomplete'"
+    (click)="showIncomplete()"
+    type="button"
+    class="btn btn-primary"
+  >
+    Show Incomplete
+  </button>
+</div>
