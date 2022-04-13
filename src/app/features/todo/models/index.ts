@@ -6,4 +6,5 @@ export interface TodoListItemModel {
 
 export interface TodoListModel {
   items: TodoListItemModel[] | null;
+  total: number;
 }

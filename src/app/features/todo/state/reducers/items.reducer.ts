@@ -1,6 +1,7 @@
 import { createEntityAdapter, EntityState } from '@ngrx/entity';
 import { createReducer, on } from '@ngrx/store';
 import * as documents from '../actions/todo.documents';
+
 export interface ItemEntity {
   id: string;
   description: string;

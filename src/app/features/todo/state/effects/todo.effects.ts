@@ -31,7 +31,7 @@ export class TodoEffects {
           .get<{ data: ItemEntity[] }>('http://localhost:1337/todos')
           .pipe(
             map((response) => response.data),
-            map((payload) => todoDocuments.todoList({ payload }))
+            map((payload) => todoDocuments.todoList({ payload })) // in the future, a document with our todo list.
           )
       )
     );
