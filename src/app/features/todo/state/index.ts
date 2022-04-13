@@ -25,8 +25,11 @@ const selectItemsBranch = createSelector(selectTodosFeature, (f) => f.items);
 
 // 3. "Helpers"
 
-const { selectAll: selectAllItemsArray, selectTotal: selectTotalOfItems } =
-  fromItems.adapter.getSelectors(selectItemsBranch);
+const {
+  selectAll: selectAllItemsArray,
+  selectTotal: selectTotalOfItems,
+  selectEntities: selectTodoEntities,
+} = fromItems.adapter.getSelectors(selectItemsBranch);
 
 const selectTodoListItemModels = createSelector(selectAllItemsArray, (items) =>
   items.map(
@@ -40,6 +43,7 @@ const selectTodoListItemModels = createSelector(selectAllItemsArray, (items) =>
 
 // 4. "Real Things" (the selectors the components will import)
 
+export const selectTodoListEntities = selectTodoEntities;
 export const selectItemListModel = createSelector(
   selectTodoListItemModels, // ItemEntity[]
   selectTotalOfItems, // number

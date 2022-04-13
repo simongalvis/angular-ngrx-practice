@@ -1,7 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
+import { Store } from '@ngrx/store';
 import { map, switchMap } from 'rxjs';
+import { selectTodoListEntities } from '..';
 import { environment } from '../../../../../environments/environment';
 import * as featureEvents from '../actions/feature.actions';
 import * as todoCommands from '../actions/todo.commands';
@@ -34,6 +36,21 @@ export class TodoEffects {
   // Map Events to Commands
   // - so, when todoFeatureEntered, say loadTheTodos
   fakeId = 1; // variable! And we MUTATING IT!! OMG!!
+
+  markItemCompleted$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(todoEvents.itemCompleted), // I just have the id of the thing
+        concatLatestFrom(() => this.store.select(selectTodoListEntities)), //
+        map(([action, entities]) => entities[action.payload]),
+        switchMap((payload) =>
+          this.client.put(this.baseUrl + '/completed-todos', payload)
+        )
+      );
+    },
+    { dispatch: false }
+  );
+
   createTempTodoItem$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(todoCommands.addTemporaryTodo),
@@ -84,5 +101,9 @@ export class TodoEffects {
     );
   });
 
-  constructor(private actions$: Actions, private client: HttpClient) {}
+  constructor(
+    private store: Store,
+    private actions$: Actions,
+    private client: HttpClient
+  ) {}
 }
