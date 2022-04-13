@@ -6,16 +6,19 @@ import {
 import * as fromModels from '../models';
 import * as fromItems from './reducers/items.reducer';
 import * as fromListFilter from './reducers/list-filter.reducer';
+import * as fromUiHints from './reducers/ui-hints.reducer';
 export const featureName = 'featureTodos';
 
 export interface TodoState {
   items: fromItems.ItemState;
   listFilter: fromListFilter.ListFilterState;
+  uiHints: fromUiHints.UiHintsState;
 }
 
 export const reducers: ActionReducerMap<TodoState> = {
   items: fromItems.reducer,
   listFilter: fromListFilter.reducer,
+  uiHints: fromUiHints.reducer,
 };
 
 // 1. Feature Select
@@ -28,6 +31,11 @@ const selectItemsBranch = createSelector(selectTodosFeature, (f) => f.items);
 const selectListFilterBranch = createSelector(
   selectTodosFeature,
   (f) => f.listFilter
+);
+
+const selectUiHintsBranch = createSelector(
+  selectTodosFeature,
+  (f) => f.uiHints
 );
 // 3. "Helpers"
 
@@ -78,4 +86,9 @@ export const selectItemListModel = createSelector(
 export const selectRemoveallEnabled = createSelector(
   selectTodoListItemModels,
   (m) => m.some((item) => item.completed)
+);
+
+export const selectItemsLoaded = createSelector(
+  selectUiHintsBranch,
+  (b) => b.itemsLoaded
 );
