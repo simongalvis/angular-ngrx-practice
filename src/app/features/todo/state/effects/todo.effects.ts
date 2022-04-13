@@ -2,13 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { map, switchMap } from 'rxjs';
-import { selectTodoListEntities } from '..';
+import { map, mergeMap, switchMap } from 'rxjs';
 import { environment } from '../../../../../environments/environment';
 import * as featureEvents from '../actions/feature.actions';
 import * as todoCommands from '../actions/todo.commands';
 import * as todoDocuments from '../actions/todo.documents';
 import * as todoEvents from '../actions/todos.events';
+import { selectTodoListEntities } from '../index';
 import { ItemEntity } from '../reducers/items.reducer';
 
 @Injectable()
@@ -43,7 +43,7 @@ export class TodoEffects {
         ofType(todoEvents.itemCompleted), // I just have the id of the thing
         concatLatestFrom(() => this.store.select(selectTodoListEntities)), //
         map(([action, entities]) => entities[action.payload]),
-        switchMap((payload) =>
+        mergeMap((payload) =>
           this.client.put(this.baseUrl + '/completed-todos', payload)
         )
       );
