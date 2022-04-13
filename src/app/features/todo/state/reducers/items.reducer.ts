@@ -16,6 +16,14 @@ const initialState = adapter.getInitialState();
 
 export const reducer = createReducer(
   initialState,
+  on(events.completedItemsCleared, (s, a) => {
+    // todo next sprint: Do this in an effect.
+    const ids = s.ids
+      .map((id) => s.entities[id])
+      .filter((item) => item?.completed)
+      .map((item) => item?.id!);
+    return adapter.removeMany(ids, s);
+  }),
   on(documents.todoList, (s, a) => adapter.setAll(a.payload, s)),
   on(documents.todo, (s, a) => adapter.addOne(a.payload, s)),
   on(documents.todo, (s, a) => adapter.removeOne(a.tempId, s)),

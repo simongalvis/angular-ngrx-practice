@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { map, mergeMap, switchMap } from 'rxjs';
+import { concatMap, map, mergeMap, switchMap } from 'rxjs';
 import { environment } from '../../../../../environments/environment';
 import * as featureEvents from '../actions/feature.actions';
 import * as todoCommands from '../actions/todo.commands';
@@ -37,6 +37,15 @@ export class TodoEffects {
   // - so, when todoFeatureEntered, say loadTheTodos
   fakeId = 1; // variable! And we MUTATING IT!! OMG!!
 
+  removeCompletedItems$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(todoEvents.completedItemsCleared),
+        switchMap(() => this.client.delete(this.baseUrl + '/completed-todos'))
+      );
+    },
+    { dispatch: false }
+  );
   markItemCompleted$ = createEffect(
     () => {
       return this.actions$.pipe(
@@ -65,7 +74,7 @@ export class TodoEffects {
   saveTodo$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(todoDocuments.temporaryTodo),
-      switchMap((action) =>
+      concatMap((action) =>
         this.client
           .post<ItemEntity>(this.baseUrl + '/todos', action.payload)
           .pipe(

@@ -9,3 +9,7 @@ export const itemCompleted = createAction(
   '[todos] events user completed todo item',
   props<{ payload: string }>()
 );
+
+export const completedItemsCleared = createAction(
+  '[todos] events completed items cleared'
+);

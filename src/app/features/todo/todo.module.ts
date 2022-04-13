@@ -11,6 +11,7 @@ import { ListComponent } from './components/list/list.component';
 import { featureName, reducers } from './state';
 import { TodoEffects } from './state/effects/todo.effects';
 import { TodoComponent } from './todo.component';
+import { ListFilterComponent } from './components/list-filter/list-filter.component';
 const routes: Routes = [
   {
     path: '',
@@ -37,6 +38,7 @@ const routes: Routes = [
     ListComponent,
     EntryComponent,
     ListItemsComponent,
+    ListFilterComponent,
   ],
   imports: [
     CommonModule,

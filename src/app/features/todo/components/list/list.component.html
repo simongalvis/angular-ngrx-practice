@@ -1,2 +1,13 @@
 <p>Your Shopping List</p>
+<app-list-filter *ngIf="showFilter"></app-list-filter>
 <app-list-items [model]="data$ | async"></app-list-items>
+
+<div>
+  <button
+    [disabled]="(clearEnabled$ | async) === false"
+    (click)="clearItems()"
+    class="btn btn-danger"
+  >
+    Clear Out Completed Items
+  </button>
+</div>
