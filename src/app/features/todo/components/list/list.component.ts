@@ -14,6 +14,6 @@ export class ListComponent implements OnInit {
   constructor(private store: Store) {}
 
   ngOnInit(): void {
-    this.data$ = this.store.select(selectItemListModel)
+    this.data$ = this.store.select(selectItemListModel);
   }
 }

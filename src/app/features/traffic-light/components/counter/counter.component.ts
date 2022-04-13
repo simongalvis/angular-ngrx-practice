@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { CounterModel } from '../../models';
@@ -8,6 +8,7 @@ import * as actions from '../../state/actions/counter.actions';
   selector: 'app-counter',
   templateUrl: './counter.component.html',
   styleUrls: ['./counter.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CounterComponent implements OnInit {
   model$!: Observable<CounterModel>;

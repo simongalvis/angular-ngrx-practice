@@ -6,33 +6,31 @@ import { todoItemCreated } from '../../state/actions/todos.events';
 @Component({
   selector: 'app-entry',
   templateUrl: './entry.component.html',
-  styleUrls: ['./entry.component.css']
+  styleUrls: ['./entry.component.css'],
 })
 export class EntryComponent implements OnInit {
-
   form = this.formBuilder.group({
-    description: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
+    description: [
+      '',
+      [Validators.required, Validators.minLength(3), Validators.maxLength(50)],
+    ],
+  });
+  constructor(private formBuilder: FormBuilder, private store: Store) {}
 
-  })
-  constructor(private formBuilder: FormBuilder, private store:Store) { }
-
-get description() {
-  return this.form.get('description');
-}
-
-  ngOnInit(): void {
-
+  get description() {
+    return this.form.get('description');
   }
-  submit(ctrl:HTMLInputElement) {
+
+  ngOnInit(): void {}
+
+  submit(ctrl: HTMLInputElement) {
     if (this.form.valid) {
       const description = this.description?.value;
-      this.store.dispatch(todoItemCreated({ description }))
-      console.log(this.form.value);
+      this.store.dispatch(todoItemCreated({ description }));
       this.form.reset();
       ctrl.focus();
-    }
-    else {
-      console.log('Fix yer errors')
+    } else {
+      // can't dispatch.
     }
   }
 }
