@@ -6,3 +6,8 @@ export const addTodo = createAction(
   '[todos] command add todo',
   props<{ payload: { description: string } }>()
 );
+
+export const addTemporaryTodo = createAction(
+  '[todos] command add temporary todo',
+  props<{ payload: { description: string } }>()
+);

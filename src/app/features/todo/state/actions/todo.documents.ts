@@ -8,5 +8,10 @@ export const todoList = createAction(
 
 export const todo = createAction(
   '[todos] document todo item',
+  props<{ payload: ItemEntity; tempId: string }>()
+);
+
+export const temporaryTodo = createAction(
+  '[todos] documents temporary todo item',
   props<{ payload: ItemEntity }>()
 );

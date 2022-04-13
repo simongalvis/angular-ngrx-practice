@@ -22,16 +22,40 @@ export class TodoEffects {
       )
     );
   });
+  // many good programmers fight me on this.
+  todoCreatedCreateTemporaryTodo$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(todoEvents.todoItemCreated),
+      map(({ description }) =>
+        todoCommands.addTemporaryTodo({ payload: { description } })
+      )
+    );
+  });
   // Map Events to Commands
   // - so, when todoFeatureEntered, say loadTheTodos
+  fakeId = 1; // variable! And we MUTATING IT!! OMG!!
+  createTempTodoItem$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(todoCommands.addTemporaryTodo),
+      map(({ payload }) =>
+        todoDocuments.temporaryTodo({
+          payload: { ...payload, id: 'T' + this.fakeId++, completed: false },
+        })
+      )
+    );
+  });
 
   saveTodo$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(todoCommands.addTodo),
-      switchMap(({ payload }) =>
+      ofType(todoDocuments.temporaryTodo),
+      switchMap((action) =>
         this.client
-          .post<ItemEntity>(this.baseUrl + '/todos', payload)
-          .pipe(map((payload) => todoDocuments.todo({ payload })))
+          .post<ItemEntity>(this.baseUrl + '/todos', action.payload)
+          .pipe(
+            map((payload) =>
+              todoDocuments.todo({ payload, tempId: action.payload.id })
+            )
+          )
       )
     );
   });
